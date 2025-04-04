@@ -14,7 +14,7 @@
 
         <!-- 検索バー -->
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="タイトルで検索..." oninput="searchArticles()">
+            <input type="text" id="search-input" placeholder="タイトルで検索...">
             <button id="search-button">
                 <img src="images/musime.png" alt="虫眼鏡">
             </button>
@@ -23,13 +23,13 @@
 
     <main>
         <!-- 記事エリア -->
-        <div class="articles" id="articles-container">
-            <!-- 記事ブロックがここに動的に追加される -->
+        <div class="articles">
+            <!-- ここに記事ブロックを追加 -->
         </div>
 
         <!-- ページネーション -->
         <div class="pagination">
-            <button onclick="window.location.href='index.html';">戻る</button>
+            <button onclick="window.location.href='previouspage.html';">戻る</button>
             <button onclick="window.location.href='nextpage.html';">次へ</button>
         </div>
     </main>
@@ -38,70 +38,7 @@
         <p>&copy; 2024 My Blog</p>
     </footer>
 
-    <script>
-        // 記事データをHTML内に直接記述
-        let allArticles = [
-            {
-                "title": "GitHubでウェブサイトを作成する方法①",
-                "desc": "アカウント作成編",
-                "url": "index.html#article1"
-            },
-            {
-                "title": "GitHubでウェブサイトを公開する方法②",
-                "desc": "リポジトリ作成と公開編",
-                "url": "index.html#article2"
-            },
-            {
-                "title": "GitHub Pagesでウェブサイトのデザインと機能をカスタマイズする方法③",
-                "desc": "デザインのカスタマイズ",
-                "url": "index.html#article3"
-            },
-            {
-                "title": "Discordの使い方入門",
-                "desc": "Discordの使い方を説明",
-                "url": "index.html#article4"
-            },
-            {
-                "title": "Discord Botを使ってサーバーを自動化しよう！",
-                "desc": "bot導入",
-                "url": "index.html#article5"
-            },
-            {
-                "title": "16進数の仕組みを覚えよう",
-                "desc": "プログラミンとかである",
-                "url": "index.html#article6"
-            }
-        ];
-
-        // ページロード時に記事を表示
-        window.onload = function() {
-            displayArticles(allArticles);
-        };
-
-        // 記事を表示する関数
-        function displayArticles(articles) {
-            const articlesContainer = document.getElementById('articles-container');
-            articlesContainer.innerHTML = ''; // 一度クリア
-            articles.forEach(article => {
-                const articleElement = document.createElement('div');
-                articleElement.classList.add('article');
-                articleElement.innerHTML = `
-                    <h2>${article.title}</h2>
-                    <p>${article.desc}</p>
-                    <a href="${article.url}">詳細</a>
-                `;
-                articlesContainer.appendChild(articleElement);
-            });
-        }
-
-        // 検索バーでフィルタリング
-        function searchArticles() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const filteredArticles = allArticles.filter(article =>
-                article.title.toLowerCase().includes(query) || article.desc.toLowerCase().includes(query)
-            );
-            displayArticles(filteredArticles); // 検索結果を表示
-        }
-    </script>
+    <script src="js/search.js"></script>
 </body>
 </html>
+
