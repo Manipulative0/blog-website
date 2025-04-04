@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,7 +16,7 @@
 
         <!-- 検索バー -->
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="タイトルで検索...">
+            <input type="text" id="search-input" placeholder="タイトルで検索..." oninput="searchArticles()">
             <button id="search-button">
                 <img src="images/musime.png" alt="虫眼鏡">
             </button>
@@ -40,28 +42,44 @@
 
     <script src="js/search.js"></script>
     <script>
-        // 記事を表示するJavaScript
+        let allArticles = []; // 全記事データを格納
         window.onload = function() {
+            // 記事を読み込む
             fetch('articles.json')
                 .then(response => response.json())
                 .then(data => {
-                    const articlesContainer = document.getElementById('articles-container');
-                    data.forEach(article => {
-                        const articleElement = document.createElement('div');
-                        articleElement.classList.add('article');
-                        articleElement.innerHTML = `
-                            <h2>${article.title}</h2>
-                            <p>${article.desc}</p>
-                        `;
-                        articleElement.onclick = function() {
-                            window.location.href = article.url;
-                        };
-                        articlesContainer.appendChild(articleElement);
-                    });
+                    allArticles = data; // 全記事データを保持
+                    displayArticles(allArticles); // 初回に全記事を表示
                 })
                 .catch(error => console.error('記事の読み込みに失敗しました:', error));
         };
+
+        // 記事を表示する関数
+        function displayArticles(articles) {
+            const articlesContainer = document.getElementById('articles-container');
+            articlesContainer.innerHTML = ''; // 一度クリア
+            articles.forEach(article => {
+                const articleElement = document.createElement('div');
+                articleElement.classList.add('article');
+                articleElement.innerHTML = `
+                    <h2>${article.title}</h2>
+                    <p>${article.desc}</p>
+                `;
+                articleElement.onclick = function() {
+                    window.location.href = article.url;
+                };
+                articlesContainer.appendChild(articleElement);
+            });
+        }
+
+        // 検索バーでフィルタリング
+        function searchArticles() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filteredArticles = allArticles.filter(article =>
+                article.title.toLowerCase().includes(query) || article.desc.toLowerCase().includes(query)
+            );
+            displayArticles(filteredArticles); // 検索結果を表示
+        }
     </script>
 </body>
 </html>
-
