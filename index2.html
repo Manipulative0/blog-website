@@ -23,8 +23,8 @@
 
     <main>
         <!-- 記事エリア -->
-        <div class="articles">
-            <!-- ここに記事ブロックを追加 -->
+        <div class="articles" id="articles-container">
+            <!-- 記事ブロックがここに動的に追加される -->
         </div>
 
         <!-- ページネーション -->
@@ -39,5 +39,29 @@
     </footer>
 
     <script src="js/search.js"></script>
+    <script>
+        // 記事を表示するJavaScript
+        window.onload = function() {
+            fetch('articles.json')
+                .then(response => response.json())
+                .then(data => {
+                    const articlesContainer = document.getElementById('articles-container');
+                    data.forEach(article => {
+                        const articleElement = document.createElement('div');
+                        articleElement.classList.add('article');
+                        articleElement.innerHTML = `
+                            <h2>${article.title}</h2>
+                            <p>${article.desc}</p>
+                        `;
+                        articleElement.onclick = function() {
+                            window.location.href = article.url;
+                        };
+                        articlesContainer.appendChild(articleElement);
+                    });
+                })
+                .catch(error => console.error('記事の読み込みに失敗しました:', error));
+        };
+    </script>
 </body>
 </html>
+
