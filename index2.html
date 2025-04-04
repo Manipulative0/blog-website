@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -40,18 +38,44 @@
         <p>&copy; 2024 My Blog</p>
     </footer>
 
-    <script src="js/search.js"></script>
     <script>
-        let allArticles = []; // 全記事データを格納
+        // 記事データをHTML内に直接記述
+        let allArticles = [
+            {
+                "title": "GitHubでウェブサイトを作成する方法①",
+                "desc": "アカウント作成編",
+                "url": "index.html#article1"
+            },
+            {
+                "title": "GitHubでウェブサイトを公開する方法②",
+                "desc": "リポジトリ作成と公開編",
+                "url": "index.html#article2"
+            },
+            {
+                "title": "GitHub Pagesでウェブサイトのデザインと機能をカスタマイズする方法③",
+                "desc": "デザインのカスタマイズ",
+                "url": "index.html#article3"
+            },
+            {
+                "title": "Discordの使い方入門",
+                "desc": "Discordの使い方を説明",
+                "url": "index.html#article4"
+            },
+            {
+                "title": "Discord Botを使ってサーバーを自動化しよう！",
+                "desc": "bot導入",
+                "url": "index.html#article5"
+            },
+            {
+                "title": "16進数の仕組みを覚えよう",
+                "desc": "プログラミンとかである",
+                "url": "index.html#article6"
+            }
+        ];
+
+        // ページロード時に記事を表示
         window.onload = function() {
-            // 記事を読み込む
-            fetch('articles.json')
-                .then(response => response.json())
-                .then(data => {
-                    allArticles = data; // 全記事データを保持
-                    displayArticles(allArticles); // 初回に全記事を表示
-                })
-                .catch(error => console.error('記事の読み込みに失敗しました:', error));
+            displayArticles(allArticles);
         };
 
         // 記事を表示する関数
@@ -64,10 +88,8 @@
                 articleElement.innerHTML = `
                     <h2>${article.title}</h2>
                     <p>${article.desc}</p>
+                    <a href="${article.url}">詳細</a>
                 `;
-                articleElement.onclick = function() {
-                    window.location.href = article.url;
-                };
                 articlesContainer.appendChild(articleElement);
             });
         }
