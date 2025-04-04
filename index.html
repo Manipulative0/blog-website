@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RUIgon_ blog-website</title>
-<link rel="stylesheet" href="https://Manipulative0.github.io/blog-website/css/styles.css">
+    <link rel="stylesheet" href="https://Manipulative0.github.io/blog-website/css/styles.css">
+    <style>
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white; /* 背景色は変えず、文字の色のみ変更 */
+        }
+        footer .footer-links {
+            color: #75acd8; /* 水色 */
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        footer .footer-links a {
+            color: #75acd8;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -46,25 +63,26 @@
             </div>
             <div class="article" onclick="window.location.href='index6.html';">
                 <h2>16進数の仕組みを覚えよう</h2>
-                <p>プログラミンとかである
-</p>
+                <p>プログラミンとかである</p>
             </div>
             <div class="article" onclick="window.location.href='article7.html';">
                 <h2>wait..</h2>
                 <p>wait..</p>
             </div>
         </div>
-
-        <!-- "次へ"ボタン -->
-        <div class="pagination">
-            <button onclick="window.location.href='index2.html';">次へ</button>
-        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 My Blog</p>
+        <div class="footer-links">
+        <a class="aiueo">© 2024 My Blog </a>
+            <a href="tool.html">| tool |</a>
+            <a href="game.html">| game |</a>
+        </div>
     </footer>
 
     <script src="js/search.js"></script>
 </body>
 </html>
+
+
